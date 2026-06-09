@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 教師甄試・口試題目資料庫</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1B3A6B;
+    --blue: #2E6DB4;
+    --blue-light: #EBF2FB;
+    --teal: #1A7A5E;
+    --teal-light: #E6F4EF;
+    --sand: #F7F5F0;
+    --white: #FFFFFF;
+    --gray-1: #F2F1EE;
+    --gray-2: #E0DED8;
+    --gray-3: #9E9C96;
+    --gray-4: #5C5A55;
+    --text: #1A1917;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  body {
+    font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background: var(--sand);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── Header ── */
+  header {
+    background: var(--navy);
+    padding: 28px 32px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(27,58,107,0.18);
+  }
+  .header-inner { max-width: 1100px; margin: 0 auto; display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+  .header-title { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: 0.03em; }
+  .header-title span { font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.55); margin-left: 10px; }
+  .stats-bar { display: flex; gap: 20px; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 700; color: #fff; line-height: 1; }
+  .stat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  /* ── Layout ── */
+  .layout { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 260px 1fr; gap: 24px; padding: 28px 20px 60px; align-items: start; }
+  @media (max-width: 760px) { .layout { grid-template-columns: 1fr; } }
+
+  /* ── Sidebar ── */
+  .sidebar { position: sticky; top: 90px; }
+  .filter-card { background: var(--white); border-radius: var(--radius-lg); border: 1px solid var(--gray-2); padding: 20px; margin-bottom: 16px; }
+  .filter-card h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-3); margin-bottom: 12px; }
+  .search-wrap { position: relative; margin-bottom: 16px; }
+  .search-wrap input { width: 100%; padding: 9px 12px 9px 36px; border: 1px solid var(--gray-2); border-radius: var(--radius); font-size: 14px; background: var(--gray-1); outline: none; font-family: inherit; color: var(--text); transition: border-color 0.15s; }
+  .search-wrap input:focus { border-color: var(--blue); background: #fff; }
+  .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--gray-3); pointer-events: none; }
+
+  .filter-group { margin-bottom: 16px; }
+  .filter-group:last-child { margin-bottom: 0; }
+  .filter-group label { display: block; font-size: 12px; font-weight: 600; color: var(--gray-4); margin-bottom: 8px; }
+  .chip-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip { padding: 4px 11px; border-radius: 20px; border: 1px solid var(--gray-2); background: var(--gray-1); font-size: 12px; color: var(--gray-4); cursor: pointer; transition: all 0.12s; user-select: none; }
+  .chip:hover { border-color: var(--blue); color: var(--blue); }
+  .chip.active { background: var(--blue); border-color: var(--blue); color: #fff; font-weight: 600; }
+  .chip.active-teal { background: var(--teal); border-color: var(--teal); color: #fff; font-weight: 600; }
+  .reset-btn { width: 100%; padding: 8px; border: 1px solid var(--gray-2); border-radius: var(--radius); background: none; font-family: inherit; font-size: 13px; color: var(--gray-3); cursor: pointer; transition: all 0.12s; margin-top: 4px; }
+  .reset-btn:hover { border-color: var(--gray-4); color: var(--gray-4); }
+
+  /* ── Main ── */
+  .main {}
+  .result-info { font-size: 13px; color: var(--gray-3); margin-bottom: 16px; padding: 0 2px; }
+  .result-info strong { color: var(--text); }
+
+  /* Group section */
+  .group-section { margin-bottom: 28px; }
+  .group-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .group-tag { background: var(--navy); color: #fff; font-size: 12px; font-weight: 700; padding: 3px 12px; border-radius: 20px; white-space: nowrap; }
+  .group-title { font-size: 17px; font-weight: 700; color: var(--navy); }
+  .group-line { flex: 1; height: 1px; background: var(--gray-2); }
+
+  /* Topic block */
+  .topic-block { margin-bottom: 10px; border-radius: var(--radius-lg); border: 1px solid var(--gray-2); background: var(--white); overflow: hidden; }
+  .topic-header { display: flex; align-items: center; gap: 10px; padding: 11px 16px; background: var(--gray-1); cursor: pointer; user-select: none; }
+  .topic-header:hover { background: var(--blue-light); }
+  .topic-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+  .topic-name { font-size: 13px; font-weight: 700; color: var(--blue); flex: 1; }
+  .topic-count { font-size: 11px; color: var(--gray-3); background: var(--gray-2); padding: 2px 8px; border-radius: 12px; }
+  .topic-arrow { font-size: 11px; color: var(--gray-3); transition: transform 0.2s; }
+  .topic-block.open .topic-arrow { transform: rotate(90deg); }
+
+  .topic-body { display: none; padding: 12px 16px 14px; border-top: 1px solid var(--gray-2); }
+  .topic-block.open .topic-body { display: block; }
+
+  /* Entry */
+  .entry { margin-bottom: 14px; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry-meta { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .meta-tag { font-size: 11px; padding: 2px 9px; border-radius: 12px; font-weight: 600; }
+  .meta-subject { background: #EEF4FB; color: #1F5A9E; }
+  .meta-note { background: #FFF4E0; color: #7A4F00; font-weight: 400; font-size: 11px; padding: 3px 10px; border-radius: var(--radius); border: 1px solid #FFE0A0; max-width: 100%; }
+  .q-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+  .q-item { display: flex; gap: 9px; align-items: flex-start; font-size: 14px; line-height: 1.65; color: var(--text); }
+  .q-num { flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%; background: var(--blue-light); color: var(--blue); font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .q-text { flex: 1; }
+
+  /* Empty state */
+  .empty { text-align: center; padding: 60px 20px; color: var(--gray-3); }
+  .empty-icon { font-size: 36px; margin-bottom: 12px; }
+  .empty p { font-size: 15px; }
+
+  /* View toggle */
+  .view-toggle { display: flex; gap: 6px; margin-bottom: 16px; }
+  .view-btn { padding: 6px 16px; border-radius: 20px; border: 1px solid var(--gray-2); background: var(--gray-1); font-size: 13px; font-family: inherit; color: var(--gray-4); cursor: pointer; transition: all 0.12s; }
+  .view-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; font-weight: 600; }
+
+  .highlight { background: #fff176; border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <div class="header-title">教師甄試・口試題目資料庫 <span>2026 年度</span></div>
+    </div>
+    <div class="stats-bar">
+      <div class="stat"><div class="stat-num" id="s-total">—</div><div class="stat-label">筆資料</div></div>
+      <div class="stat"><div class="stat-num" id="s-q">—</div><div class="stat-label">道題目</div></div>
+      <div class="stat"><div class="stat-num" id="s-county">—</div><div class="stat-label">個縣市</div></div>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="filter-card">
+      <div class="search-wrap">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="search" placeholder="搜尋題目關鍵字…">
+      </div>
+
+      <div class="filter-group">
+        <label>縣市</label>
+        <div class="chip-list" id="filter-county"></div>
+      </div>
+
+      <div class="filter-group">
+        <label>教育階段</label>
+        <div class="chip-list" id="filter-level"></div>
+      </div>
+
+      <div class="filter-group">
+        <label>科別</label>
+        <div class="chip-list" id="filter-subject"></div>
+      </div>
+
+      <button class="reset-btn" onclick="resetFilters()">清除所有篩選</button>
+    </div>
+
+    <div class="filter-card">
+      <h3>題目類型</h3>
+      <div class="chip-list" id="filter-topic"></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="view-toggle">
+      <button class="view-btn active" onclick="setView('county', this)">依縣市／階段</button>
+      <button class="view-btn" onclick="setView('topic', this)">依題目類型</button>
+    </div>
+    <div class="result-info" id="result-info"></div>
+    <div id="results"></div>
+  </main>
+</div>
+
+<script>
+// ═══════════════════════════════════════════
+// DATA — 新增資料只需在此陣列加一筆 { county, level, subject, questions, note }
+// ═══════════════════════════════════════════
+const DATA = [
+  { county:"雲林縣", level:"國中", subject:"", questions:["融合教育、特殊生在班上如何處理"] },
+  { county:"雲林縣", level:"國中", subject:"", questions:["你認為老師的韌性是什麼？"] },
+  { county:"雲林縣", level:"國小", subject:"", questions:["如果您將來兼任教務主任，你如何帶領老師做四學？","如果家長很晚了還打電話，而且是生活小事，您會如何處理？","就您過去的教學經驗，待過不同規模的學校，有什麼樣的困境？"], note:"可攜帶備審資料，評委會針對回答狀況再進一步追問" },
+  { county:"雲林縣", level:"國小", subject:"", questions:["融合教育在班上的實行例子？","針對學習落後學生的教學策略調整？"], note:"正向回應題目" },
+  { county:"雲林縣", level:"國中", subject:"", questions:["對於校事會議的看法與因應策略","學生課堂自傷行為的處理策略"] },
+  { county:"雲林縣", level:"國小", subject:"", questions:["核心素養是什麼？","雲林目前的教育政策（講2-3個）","你有什麼特質符合未來的老師？","自我介紹1-2分鐘（學經歷、特殊專長、為何選雲林、教育理念）"] },
+  { county:"雲林縣", level:"國小", subject:"", questions:["1-2分鐘自我介紹（學經歷、教育理念、為何報考雲林縣）","說出雲林縣三個重大教育議題","你有什麼特質，讓我們可以錄取你？"] },
+  { county:"雲林縣", level:"國小", subject:"一般科", questions:["一分鐘自我介紹","如何處理親師生間的衝突？","對目前教育現場的體育課有什麼建議？","自己目前遇到的最大挑戰是什麼？"], note:"所有考生需在7:30-8:00先到試教試場報到簽名" },
+  { county:"新北市", level:"高職", subject:"餐飲管理科", questions:["請簡單介紹一下自己","是否有一年以上連續教學經歷？","外國姊妹校及國中生到校參觀，需辦宴會及課程體驗，如何規劃？","身為新手教師，如何運用個人資源籌備宴會？","對承接學校行政業務的態度及過往行政經歷？","教務處教學組及實研組的業務有哪些？","是否有帶過學生競賽的經歷？","對我們學校該科系的了解？"], note:"可先遞教學資料供評審參閱，口試問題可能從中延伸" },
+  { county:"新竹縣", level:"高職", subject:"餐飲管理科", questions:["自我介紹","對AI的看法？課堂上有使用過哪些AI工具？","最崇拜的一位名人","影響你最深的一位老師","學習期間的挫折經驗","教學期間印象深刻的事件","少子化下學校科系是否會縮減的看法","是否會想接行政？較想從事學務處或教務處？","未來是否有在當地成家立業的打算？","父母的工作及對個人的影響？","最近讀過的一本書","對於我們學校的了解"] },
+  { county:"雲林縣", level:"國中", subject:"英文科", questions:["SDGs、SEL如何透過AI融入課程","有了AI之後教師的角色有了怎樣的改變？","自我介紹1分鐘","其餘題目大部分針對三折頁檔案詢問細節"], note:"確認報到時間地點；時間計時從進去繳交准考證後才開始" },
+  { county:"雲林縣", level:"國中", subject:"數學科", questions:["新舊課綱的差異","班級經營親師溝通如何實施","有學生家長質疑你的教學，你會怎麼處理？","目前教學現場不好，怎麼還想當老師？"], note:"可帶教具、三折頁；建議打電話去問確認" },
+  { county:"台東縣", level:"國中", subject:"英語科", questions:["全英自我介紹","台東學生英文學習較低落，如何提升學習能力？","班上同學一直叫某同學斗哥，身為任課老師怎麼處理？（霸凌議題）","有學生因參加元宵節活動而不來上學，怎麼處理？"], note:"英語全英自我介紹一定要練順，英語平台使用模式要熟練" },
+  { county:"雲林縣", level:"國中", subject:"特教-身障組", questions:["自我介紹1分鐘","最贊成的特殊教育政策是哪一項？","身為班導，需要有什麼能力去推動融合教育？","特教孩子在班上分組常落單，身為老師會怎麼幫助他？","遇到不配合班上事務的家長，如何溝通？","處理學生在班上不適應的狀況，有無實際例子？"] },
+  { county:"雲林縣", level:"國小", subject:"特教科", questions:["過去是否有教學經驗？年資多久？","不想被鑑定為特教學生，如何解決？","有情緒行為問題的學生IEP要寫上什麼？","罰站不能超過多少時間？超過會發生什麼事？","普通班同學、老師、家長覺得特生有特權，不理解特教作為怎麼辦？"] },
+  { county:"雲林縣", level:"國中", subject:"英語科", questions:["自我介紹兩分鐘","高雄的孩子跟雲林的孩子有什麼差別？","雲林的孩子學習動機較弱，怎麼協助他們？","從語資班孩子身上有學到什麼嗎？","實習期間待過的處室，有沒有比較印象深刻的事件？"] },
+  { county:"雲林縣", level:"國中", subject:"國文科", questions:["如果遇到性平事件，處理的邏輯是什麼？","在偏鄉學生程度較差的狀況下，如何進行作文教學？","如何提升學生的閱讀理解能力？"], note:"可攜帶個人教學檔案，評審會根據檔案內容提問" },
+  { county:"雲林縣", level:"國小", subject:"普通教師", questions:["自我介紹一分鐘","環境不友善，為何還想當老師？","對於九年一貫的看法？如何培養孩子自主學習？","進入新的學校後會做哪些準備？"], note:"委員會加問基本資料（雲林哪裡人、有無考知能檢定、畢業年度）" },
+  { county:"雲林縣", level:"國中", subject:"國文科", questions:["身為導師，學生遇到疑似校園霸凌的處理方式","將SEL融入領域教學中，如何說明實作方式及相關理念？","學習扶助測驗的相關知能","如何幫助學習扶助的孩子？"], note:"評審不要求自我介紹，坐下後立刻提問；試教結束後不再追問" },
+  { county:"雲林縣", level:"國中", subject:"英語科", questions:["一分鐘簡單自我介紹","班上口說程度落差大怎麼處理？","您認為AI是否會取代教師的角色？","關於雲林的教育政策你知道有什麼？","出國交換如何影響你的價值觀？"] }
+];
+
+// ═══════════════════════════════════════════
+// TOPIC DEFINITIONS — 可自行新增類型
+// ═══════════════════════════════════════════
+const TOPICS = [
+  { id:"intro",    name:"自我介紹",           fn: q => /自我介紹|自介/.test(q) },
+  { id:"ai",       name:"AI與科技融入教學",    fn: q => /AI|人工智慧/.test(q) },
+  { id:"inclusive",name:"融合教育與特殊教育",   fn: q => /融合教育|特教|特生|IEP|鑑定/.test(q) },
+  { id:"parent",   name:"班級經營與親師溝通",   fn: q => /班級經營|親師|家長|溝通|衝突/.test(q) },
+  { id:"curriculum",name:"課程設計與教學策略",  fn: q => /課綱|核心素養|課程|教學策略|SEL|SDG|作文|閱讀/.test(q) },
+  { id:"safety",   name:"校園霸凌與性平事件",   fn: q => /霸凌|性平|自傷/.test(q) },
+  { id:"support",  name:"學習扶助與弱勢學生",   fn: q => /學習扶助|偏鄉|學習動機|低落|落後/.test(q) },
+  { id:"admin",    name:"行政業務與學校治理",   fn: q => /行政|教務|主任|校事會議/.test(q) },
+  { id:"policy",   name:"教育政策與時事",       fn: q => /教育政策|少子化|教育議題/.test(q) },
+  { id:"personal", name:"個人特質與從師動機",   fn: q => /韌性|特質|挫折|為何|為什麼|交換|當老師/.test(q) },
+];
+function getTopics(q) {
+  const matched = TOPICS.filter(t => t.fn(q));
+  return matched.length ? matched : [{ id:"other", name:"其他", fn:()=>true }];
+}
+
+// ═══════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════
+let state = { county: new Set(), level: new Set(), subject: new Set(), topic: new Set(), search: "", view: "county" };
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+function unique(arr) { return [...new Set(arr)].filter(Boolean).sort(); }
+
+function buildFilters() {
+  const counties  = unique(DATA.map(d => d.county));
+  const levels    = unique(DATA.map(d => d.level));
+  const subjects  = unique(DATA.map(d => d.subject));
+  const topicList = TOPICS;
+
+  function chips(id, items, stateKey, teal=false) {
+    const el = document.getElementById(id);
+    el.innerHTML = items.map(v => {
+      const label = typeof v === "string" ? v : v.name;
+      const key   = typeof v === "string" ? v : v.id;
+      return `<span class="chip" data-key="${key}" onclick="toggleFilter('${stateKey}','${key}',this,${teal})">${label}</span>`;
+    }).join('');
+  }
+
+  chips("filter-county",  counties,  "county");
+  chips("filter-level",   levels,    "level");
+  chips("filter-subject", subjects,  "subject");
+  chips("filter-topic",   topicList, "topic", true);
+}
+
+function toggleFilter(key, val, el, teal=false) {
+  if (state[key].has(val)) { state[key].delete(val); el.classList.remove("active","active-teal"); }
+  else { state[key].add(val); el.classList.add(teal ? "active-teal" : "active"); }
+  render();
+}
+
+function resetFilters() {
+  ["county","level","subject","topic"].forEach(k => state[k].clear());
+  state.search = "";
+  document.getElementById("search").value = "";
+  document.querySelectorAll(".chip").forEach(c => c.classList.remove("active","active-teal"));
+  render();
+}
+
+function setView(v, btn) {
+  state.view = v;
+  document.querySelectorAll(".view-btn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  render();
+}
+
+// ═══════════════════════════════════════════
+// FILTER
+// ═══════════════════════════════════════════
+function filterData() {
+  const kw = state.search.trim().toLowerCase();
+  return DATA.map(entry => {
+    if (state.county.size  && !state.county.has(entry.county))   return null;
+    if (state.level.size   && !state.level.has(entry.level))     return null;
+    if (state.subject.size && !state.subject.has(entry.subject)) return null;
+    const qs = entry.questions.filter(q => {
+      if (kw && !q.toLowerCase().includes(kw)) return false;
+      if (state.topic.size) {
+        const qt = getTopics(q).map(t=>t.id);
+        if (![...state.topic].some(t => qt.includes(t))) return false;
+      }
+      return true;
+    });
+    if (!qs.length) return null;
+    return { ...entry, questions: qs };
+  }).filter(Boolean);
+}
+
+// ═══════════════════════════════════════════
+// RENDER
+// ═══════════════════════════════════════════
+function hl(text) {
+  const kw = state.search.trim();
+  if (!kw) return text;
+  const re = new RegExp(kw.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+  return text.replace(re, m => `<mark class="highlight">${m}</mark>`);
+}
+
+function renderEntry(entry) {
+  const meta = [
+    entry.subject ? `<span class="meta-tag meta-subject">${entry.subject}</span>` : "",
+  ].join("");
+  const note = entry.note ? `<div class="meta-note">📌 ${entry.note}</div>` : "";
+  const qs = entry.questions.map((q,i) =>
+    `<li class="q-item"><span class="q-num">${i+1}</span><span class="q-text">${hl(q)}</span></li>`
+  ).join("");
+  return `
+    <div class="entry">
+      ${meta || note ? `<div class="entry-meta">${meta}${note}</div>` : ""}
+      <ul class="q-list">${qs}</ul>
+    </div>`;
+}
+
+function renderByCounty(filtered) {
+  const groups = new Map();
+  filtered.forEach(entry => {
+    const key = entry.county + "||" + entry.level;
+    if (!groups.has(key)) groups.set(key, { county:entry.county, level:entry.level, entries:[] });
+    groups.get(key).entries.push(entry);
+  });
+
+  let html = "";
+  let gIdx = 0;
+  groups.forEach(({ county, level, entries }) => {
+    gIdx++;
+    const topicMap = new Map();
+    entries.forEach(entry => {
+      entry.questions.forEach(q => {
+        getTopics(q).forEach(t => {
+          if (!topicMap.has(t.id)) topicMap.set(t.id, { name:t.name, items:[] });
+          let last = topicMap.get(t.id).items.at(-1);
+          if (!last || last.entry !== entry) { last = { entry, qs:[] }; topicMap.get(t.id).items.push(last); }
+          last.qs.push(q);
+        });
+      });
+    });
+
+    const tBlocks = [...topicMap.entries()].map(([tid, {name, items}]) => {
+      const body = items.map(({entry, qs}) => renderEntry({...entry, questions:qs})).join("");
+      return `
+        <div class="topic-block" onclick="toggleBlock(this)">
+          <div class="topic-header">
+            <span class="topic-dot"></span>
+            <span class="topic-name">${name}</span>
+            <span class="topic-count">${items.reduce((s,i)=>s+i.qs.length,0)} 題</span>
+            <span class="topic-arrow">▶</span>
+          </div>
+          <div class="topic-body">${body}</div>
+        </div>`;
+    }).join("");
+
+    html += `
+      <div class="group-section">
+        <div class="group-header">
+          <span class="group-tag">${gIdx}</span>
+          <span class="group-title">${county}・${level}</span>
+          <div class="group-line"></div>
+          <span style="font-size:12px;color:var(--gray-3)">${entries.length} 筆</span>
+        </div>
+        ${tBlocks}
+      </div>`;
+  });
+  return html;
+}
+
+function renderByTopic(filtered) {
+  const topicMap = new Map();
+  filtered.forEach(entry => {
+    entry.questions.forEach(q => {
+      getTopics(q).forEach(t => {
+        if (!topicMap.has(t.id)) topicMap.set(t.id, { name:t.name, groups:new Map() });
+        const gKey = entry.county + "・" + entry.level;
+        const tm = topicMap.get(t.id);
+        if (!tm.groups.has(gKey)) tm.groups.set(gKey, []);
+        let last = tm.groups.get(gKey).at(-1);
+        if (!last || last.entry !== entry) { last = { entry, qs:[] }; tm.groups.get(gKey).push(last); }
+        last.qs.push(q);
+      });
+    });
+  });
+
+  let html = "";
+  let tIdx = 0;
+  topicMap.forEach(({ name, groups }) => {
+    tIdx++;
+    const totalQ = [...groups.values()].flat().reduce((s,i)=>s+i.qs.length,0);
+    const gBlocks = [...groups.entries()].map(([gKey, items]) => {
+      const body = items.map(({entry, qs}) => renderEntry({...entry, questions:qs})).join("");
+      return `
+        <div class="topic-block" onclick="toggleBlock(this)">
+          <div class="topic-header">
+            <span class="topic-dot" style="background:var(--teal)"></span>
+            <span class="topic-name" style="color:var(--teal)">${gKey}</span>
+            <span class="topic-count">${items.reduce((s,i)=>s+i.qs.length,0)} 題</span>
+            <span class="topic-arrow">▶</span>
+          </div>
+          <div class="topic-body">${body}</div>
+        </div>`;
+    }).join("");
+
+    html += `
+      <div class="group-section">
+        <div class="group-header">
+          <span class="group-tag" style="background:var(--teal)">${tIdx}</span>
+          <span class="group-title">${name}</span>
+          <div class="group-line"></div>
+          <span style="font-size:12px;color:var(--gray-3)">${totalQ} 題</span>
+        </div>
+        ${gBlocks}
+      </div>`;
+  });
+  return html;
+}
+
+function toggleBlock(el) {
+  el.classList.toggle("open");
+}
+
+function render() {
+  const filtered = filterData();
+  const totalQ = filtered.reduce((s,d) => s+d.questions.length, 0);
+  document.getElementById("result-info").innerHTML =
+    `篩選結果：<strong>${filtered.length}</strong> 筆資料・<strong>${totalQ}</strong> 道題目`;
+
+  const container = document.getElementById("results");
+  if (!filtered.length) {
+    container.innerHTML = `<div class="empty"><div class="empty-icon">🔍</div><p>沒有符合條件的題目，試著調整篩選條件</p></div>`;
+    return;
+  }
+  container.innerHTML = state.view === "county" ? renderByCounty(filtered) : renderByTopic(filtered);
+}
+
+// ═══════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════
+document.getElementById("search").addEventListener("input", e => {
+  state.search = e.target.value;
+  render();
+});
+
+const totalQ = DATA.reduce((s,d) => s+d.questions.length, 0);
+const counties = new Set(DATA.map(d=>d.county)).size;
+document.getElementById("s-total").textContent = DATA.length;
+document.getElementById("s-q").textContent = totalQ;
+document.getElementById("s-county").textContent = counties;
+
+buildFilters();
+render();
+</script>
+</body>
+</html>
