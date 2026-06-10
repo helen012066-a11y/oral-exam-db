@@ -88,15 +88,14 @@
 
   /* Topic block */
   .topic-block { margin-bottom: 10px; border-radius: var(--radius-lg); border: 1px solid var(--gray-2); background: var(--white); overflow: hidden; }
-  .topic-header { display: flex; align-items: center; gap: 10px; padding: 11px 16px; background: var(--gray-1); cursor: pointer; user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: rgba(0,0,0,0.1); }
+  .topic-header { display: flex; align-items: center; gap: 10px; padding: 11px 16px; background: var(--gray-1); cursor: pointer; user-select: none; }
   .topic-header:hover { background: var(--blue-light); }
   .topic-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
   .topic-name { font-size: 13px; font-weight: 700; color: var(--blue); flex: 1; }
   .topic-count { font-size: 11px; color: var(--gray-3); background: var(--gray-2); padding: 2px 8px; border-radius: 12px; }
-  .topic-arrow { font-size: 11px; color: var(--gray-3); transition: transform 0.2s; }
-  .topic-block.open .topic-arrow { transform: rotate(90deg); }
+  
 
-  .topic-body { display: none; padding: 12px 16px 14px; border-top: 1px solid var(--gray-2); }
+  .topic-body { display: block; padding: 12px 16px 14px; border-top: 1px solid var(--gray-2); }
   .topic-block.open .topic-body { display: block; }
 
   /* Entry */
@@ -538,12 +537,12 @@ function renderByCounty(filtered) {
     const tBlocks = [...topicMap.entries()].map(([tid, {name, items}]) => {
       const body = items.map(({entry, qs}) => renderEntry({...entry, questions:qs})).join("");
       return `
-        <div class="topic-block open">
-          <div class="topic-header" onclick="toggleBlock(this)">
+        <div class="topic-block" >
+          <div class="topic-header">
             <span class="topic-dot"></span>
             <span class="topic-name">${name}</span>
             <span class="topic-count">${items.reduce((s,i)=>s+i.qs.length,0)} 題</span>
-            <span class="topic-arrow">▶</span>
+            
           </div>
           <div class="topic-body">${body}</div>
         </div>`;
@@ -587,8 +586,8 @@ function renderByTopic(filtered) {
     const gBlocks = [...groups.entries()].map(([gKey, items]) => {
       const body = items.map(({entry, qs}) => renderEntry({...entry, questions:qs})).join("");
       return `
-        <div class="topic-block open">
-          <div class="topic-header" onclick="toggleBlock(this)">
+        <div class="topic-block" >
+          <div class="topic-header">
             <span class="topic-dot" style="background:var(--teal)"></span>
             <span class="topic-name" style="color:var(--teal)">${gKey}</span>
             <span class="topic-count">${items.reduce((s,i)=>s+i.qs.length,0)} 題</span>
@@ -613,8 +612,7 @@ function renderByTopic(filtered) {
 }
 
 function toggleBlock(el) {
-  const block = el.closest('.topic-block');
-  if (block) block.classList.toggle("open");
+  el.classList.toggle("open");
 }
 
 function render() {
